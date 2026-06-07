@@ -2068,8 +2068,8 @@ class Rac3Interface(GameInterface):
         if ((self.planet != RAC3REGION.METROPOLIS or not self.short_pause)
             and RAC3LOCATION.METROPOLIS_DEFEAT_KLUNK not in self.checked_locations):
             self.metro_dropship = 0
-        if ((self.planet != RAC3REGION.HOLOSTAR_STUDIOS or self.short_pause)
-            and RAC3LOCATION.HOLOSTAR_RETURN_TO_SHIP not in self.checked_locations):
+        if (self.planet != RAC3REGION.HOLOSTAR_STUDIOS
+                and RAC3LOCATION.HOLOSTAR_RETURN_TO_SHIP not in self.checked_locations):
             self.holo_teleport = 0
         for name, data in RAC3_SHORTCUT_DATA_TABLE.items():
             if self.planet == data.PLANET and self.options.shortcuts.get(name, False):
@@ -2109,7 +2109,7 @@ class Rac3Interface(GameInterface):
                         if self.holo_teleport == 0:
                             self.holo_teleport += 1
                             self._write_bits(data.FLAG_ADDRESSES[0][0], {data.FLAG_ADDRESSES[0][1]})
-                        if self.holo_teleport == 1:
+                        elif self.holo_teleport == 1:
                             self.holo_teleport += 1
                             self._unwrite_bits(data.FLAG_ADDRESSES[0][0], {data.FLAG_ADDRESSES[0][1]})
                             self.force_respawn()
