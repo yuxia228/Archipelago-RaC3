@@ -578,16 +578,6 @@ class Rac3Interface(GameInterface):
         target_moby_id = RAC3STATUS.PDA_VENDOR_MOBY_ID
         if self.pda_vendor and self._read16(self.pda_vendor + 0xB2) == target_moby_id:
             return self.pda_vendor
-        if self.current_game == RAC3VERSION.JP_ID:
-            # Vendor moby addr is dynamic in JP; locate it by scanning for fixed XYZ bytes.
-            scan_start = 0x01D80000
-            data = self._read_bytes(scan_start, 0x01D90000 - scan_start)
-            idx = data.find(bytes.fromhex('7412DF43FE257043A4236342'))
-            if idx != -1:
-                base = scan_start + idx - 0x10
-                if self._read16(base + 0xB2) == target_moby_id:
-                    return base
-            return 0
         return self.find_moby_by_id_iteration(target_moby_id)
 
     def vendor_check(self) -> RAC3VENDORTYPE | None:
