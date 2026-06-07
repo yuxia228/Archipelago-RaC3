@@ -101,6 +101,7 @@ JP_VENDOR_OFFSET_CORRECTION: dict[str, int] = {
     RAC3REGION.QWARKS_HIDEOUT: -0x40,
     RAC3REGION.MARCADIA:       -0x40,
     RAC3REGION.TYHRRANOSIS:    -0x40,
+    RAC3REGION.OBANI_DRACO:    -0x40,
 }
 
 def jp_convert_address(address: int, planet: str) -> int:
